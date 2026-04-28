@@ -9,7 +9,7 @@ export default function ModeBanner() {
   useEffect(() => {
     const fetchStatus = async () => {
       try {
-        const data = await apiClient.get('/system/status');
+        const data = await apiClient.get('/system/status', { execution_mode: 'PAPER' });
         setStatus(data);
       } catch (err) {
         console.error("Failed to fetch system status");

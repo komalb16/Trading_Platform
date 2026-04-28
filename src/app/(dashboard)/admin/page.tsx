@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 import { apiClient } from '@/lib/api';
 
 export default function AdminDashboard() {
-  const [users, setUsers] = useState([]);
-  const [logs, setLogs] = useState([]);
+  const [users, setUsers] = useState<any[]>([]);
+  const [logs, setLogs] = useState<any[]>([]);
   const [inviteToken, setInviteToken] = useState('');
   const [loading, setLoading] = useState(true);
 
@@ -15,8 +15,8 @@ export default function AdminDashboard() {
 
   const loadData = async () => {
     try {
-      const usersData = await apiClient.get('/admin/users');
-      const logsData = await apiClient.get('/admin/logs');
+      const usersData = await apiClient.get('/admin/users', [] as any[]);
+      const logsData = await apiClient.get('/admin/logs', [] as any[]);
       setUsers(usersData);
       setLogs(logsData);
     } catch (err) {
@@ -28,7 +28,7 @@ export default function AdminDashboard() {
 
   const generateInvite = async () => {
     try {
-      const res = await apiClient.post('/admin/invite-codes', { max_uses: 1 });
+      const res = await apiClient.post('/admin/invite-codes', { max_uses: 1 }) as any;
       setInviteToken(res.token);
       loadData();
     } catch (err) {
@@ -101,7 +101,7 @@ export default function AdminDashboard() {
                     <td className="p-4 text-slate-400">{user.role}</td>
                     <td className="p-4">
                       {user.status === 'PENDING' && (
-                        <button onClick={() => approve_user(user.id)} className="text-blue-400 hover:text-blue-300 font-semibold underline">Approve</button>
+                        <button onClick={() => approveUser(user.id)} className="text-blue-400 hover:text-blue-300 font-semibold underline">Approve</button>
                       )}
                     </td>
                   </tr>

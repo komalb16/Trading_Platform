@@ -16,7 +16,7 @@ export function useMetricsPolling(intervalMs: number = 5000, limit: number = 50)
     if (isPaused) return;
     
     try {
-      const data = await apiClient.get('/monitoring/metrics');
+      const data = await apiClient.get('/monitoring/metrics', { latency: { avg_ms: 0 } } as any);
       setMetrics(data);
       
       const now = new Date().toLocaleTimeString();

@@ -17,7 +17,7 @@ export default function LoginPage() {
     setError('');
 
     try {
-      const res = await apiClient.post('/auth/login', { email, password });
+      const res = await apiClient.post('/auth/login', { email, password }) as any;
       // Redirect based on role returned from login
       if (res.role === 'ADMIN') {
         router.push('/admin');
@@ -40,7 +40,7 @@ export default function LoginPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
           </div>
-          <h2 className="text-3xl font-extrabold tracking-tight">QuantTrade</h2>
+          <h2 className="text-3xl font-extrabold tracking-tight">ProChart</h2>
           <p className="mt-2 text-sm text-slate-400">Institutional Execution Terminal</p>
         </div>
 

@@ -159,8 +159,9 @@ const MOCK_ORDERS: Order[] = [
 ];
 
 // ─── Public API ───────────────────────────────────────────────────────────────
-
-export const api = {
+export const apiClient = {
+  get,
+  post,
   health:     () => get<HealthStatus>('/system/health', MOCK_HEALTH),
   metrics:    () => get<Metrics>('/data/metrics', MOCK_METRICS),
   trades:     () => get<Trade[]>('/trades', MOCK_TRADES),
@@ -176,3 +177,7 @@ export const api = {
   squareOff: (tradeId: string) =>
     post<{ status: string }>(`/trades/${tradeId}/square-off`, {}),
 };
+
+export const api = apiClient;
+
+
